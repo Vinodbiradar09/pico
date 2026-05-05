@@ -4,7 +4,6 @@ import Link from "next/link";
 export function SiteNav() {
   return (
     <header className="sticky top-0 z-40 flex h-13 items-center gap-3 border-b border-zinc-200 bg-zinc-50/90 px-6 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90 lg:px-8">
-      {/* Logo */}
       <Link
         href="/"
         className="flex items-center gap-2 focus-visible:outline-none"
@@ -30,7 +29,6 @@ export function SiteNav() {
 
       <div className="flex-1" />
 
-      {/* Nav links */}
       <nav className="flex items-center gap-1" aria-label="Main navigation">
         <Link
           href="/tools"

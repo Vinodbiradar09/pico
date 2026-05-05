@@ -1,6 +1,10 @@
 "use client";
 import { Copy, Download, RotateCcw, FileImage } from "lucide-react";
 import type { Selections } from "@/lib/stack-utils";
+import { BottomBarChip } from "./BottomBarChip";
+import { CATEGORIES } from "@/lib/stack-data";
+import { PromptModal } from "./PromptModal";
+import { useState } from "react";
 import {
   getSelectedItem,
   buildPrompt,
@@ -8,10 +12,6 @@ import {
   buildDiagramSvg,
   downloadPng,
 } from "@/lib/stack-utils";
-import { BottomBarChip } from "./BottomBarChip";
-import { CATEGORIES } from "@/lib/stack-data";
-import { PromptModal } from "./PromptModal";
-import { useState } from "react";
 
 interface BottomBarProps {
   selections: Selections;
@@ -30,7 +30,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
   async function handleDownloadPng() {
     setDownloading("png");
     try {
-      const svg = buildCardSvg(CATEGORIES, selections);
+      const svg = await buildCardSvg(CATEGORIES, selections);
       await downloadPng(svg, "my-stack.png");
     } finally {
       setDownloading(null);
@@ -40,7 +40,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
   async function handleDownloadDiagram() {
     setDownloading("diagram");
     try {
-      const svg = buildDiagramSvg(CATEGORIES, selections);
+      const svg = await buildDiagramSvg(CATEGORIES, selections);
       await downloadPng(svg, "my-stack-diagram.png");
     } finally {
       setDownloading(null);
@@ -54,12 +54,10 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
         aria-label="Your selected stack"
       >
         <div className="mx-auto flex max-w-7xl items-center gap-4">
-          {/* Label */}
           <span className="hidden shrink-0 text-[10px] font-semibold uppercase tracking-widest text-zinc-400 sm:block">
             Your Stack
           </span>
 
-          {/* Chips — horizontally scrollable */}
           <div
             className="flex flex-1 gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             aria-live="polite"
@@ -71,7 +69,6 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
             })}
           </div>
 
-          {/* Actions */}
           <div className="flex shrink-0 items-center gap-2">
             <button
               disabled={!hasAny}

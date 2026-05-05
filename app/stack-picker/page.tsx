@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-// This page is fully static — all interactivity is in StackPickerClient
 export const dynamic = "force-static";
 
 export default function StackPickerPage() {
@@ -23,7 +22,6 @@ export default function StackPickerPage() {
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-zinc-950">
       <SiteNav />
 
-      {/* Hero — static, SSG */}
       <section
         className="mx-auto w-full max-w-7xl px-6 pb-10 pt-14 lg:px-8"
         aria-labelledby="hero-heading"
@@ -33,7 +31,7 @@ export default function StackPickerPage() {
             className="block h-px w-6 bg-zinc-300 dark:bg-zinc-600"
             aria-hidden="true"
           />
-          Tool · Fig A
+          Stack Picker Tool
         </p>
         <h1
           id="hero-heading"
@@ -58,7 +56,6 @@ export default function StackPickerPage() {
         </div>
       </section>
 
-      {/* Interactive grid + bottom bar */}
       <StackPickerClient />
     </div>
   );

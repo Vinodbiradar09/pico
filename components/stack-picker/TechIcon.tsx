@@ -1,7 +1,6 @@
 "use client";
-
-import { useState } from "react";
 import type { StackItem } from "@/lib/stack-data";
+import { useState } from "react";
 
 interface TechIconProps {
   item: StackItem;

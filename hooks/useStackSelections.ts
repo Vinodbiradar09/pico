@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import { CATEGORIES } from "@/lib/stack-data";
 import type { Selections } from "@/lib/stack-utils";
 import { getSelectedItem } from "@/lib/stack-utils";
+import { CATEGORIES } from "@/lib/stack-data";
 
 export function useStackSelections() {
   const [selections, setSelections] = useState<Selections>({});

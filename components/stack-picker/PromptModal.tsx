@@ -11,7 +11,6 @@ interface PromptModalProps {
 export function PromptModal({ open, prompt, onClose }: PromptModalProps) {
   const [copied, setCopied] = useState(false);
 
-  // Close on Escape key
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => {
@@ -21,7 +20,6 @@ export function PromptModal({ open, prompt, onClose }: PromptModalProps) {
     return () => document.removeEventListener("keydown", handler);
   }, [open, onClose]);
 
-  // Prevent body scroll when open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -49,7 +47,6 @@ export function PromptModal({ open, prompt, onClose }: PromptModalProps) {
         className="relative w-full max-w-lg animate-in fade-in slide-in-from-bottom-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl duration-200 dark:border-zinc-700 dark:bg-zinc-900"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
         <button
           onClick={onClose}
           aria-label="Close modal"
@@ -58,7 +55,6 @@ export function PromptModal({ open, prompt, onClose }: PromptModalProps) {
           <X className="h-4 w-4" />
         </button>
 
-        {/* Header */}
         <h3
           id="modal-title"
           className="mb-1 text-base font-semibold text-zinc-900 dark:text-zinc-100"
@@ -69,12 +65,10 @@ export function PromptModal({ open, prompt, onClose }: PromptModalProps) {
           Paste this into any AI assistant to scaffold your project.
         </p>
 
-        {/* Prompt text */}
         <pre className="mb-4 max-h-60 overflow-y-auto rounded-xl border border-zinc-200 bg-zinc-50 p-4 font-mono text-xs leading-relaxed text-zinc-600 whitespace-pre-wrap dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-300">
           {prompt}
         </pre>
 
-        {/* Footer actions */}
         <div className="flex justify-end gap-2">
           <button
             onClick={onClose}

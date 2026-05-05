@@ -26,7 +26,6 @@ export function StackItemRow({ item, selected, onToggle }: StackItemRowProps) {
         }
       `}
     >
-      {/* Icon wrapper */}
       <div
         className={`
           flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border
@@ -40,7 +39,6 @@ export function StackItemRow({ item, selected, onToggle }: StackItemRowProps) {
         <TechIcon item={item} size={22} />
       </div>
 
-      {/* Name */}
       <span
         className={`flex-1 text-sm font-medium leading-none ${
           selected
@@ -51,7 +49,6 @@ export function StackItemRow({ item, selected, onToggle }: StackItemRowProps) {
         {item.name}
       </span>
 
-      {/* Check dot */}
       <div
         className={`
           flex h-4.5 w-4.5 shrink-0 items-center justify-center
