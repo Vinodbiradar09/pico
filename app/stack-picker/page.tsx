@@ -31,41 +31,14 @@ export default function StackPickerPage() {
               id="hero-heading"
               className="mb-5 text-[2.6rem] font-bold leading-[1.1] tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl lg:text-6xl"
             >
-              Your stack, <br className="hidden sm:block" />
-              <span className="text-blue-600">decided.</span>
+              Pick Your stack. <br className="hidden sm:block" />
+              <span className="text-blue-600">Ship It.</span>
             </h1>
             <p className="max-w-120 text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
-              Stop debating. Pick from 100+ battle-tested technologies across
-              every layer then export a clean architecture diagram or a
-              ready-to-paste AI scaffold prompt in one click.
+              Export the blueprint. Start building. Curated technologies across
+              every layer, with architecture diagrams and AI scaffold prompts
+              ready in one click.
             </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-6">
-              <div>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  100+
-                </p>
-                <p className="text-xs font-medium text-zinc-400">
-                  Technologies
-                </p>
-              </div>
-              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
-              <div>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  17
-                </p>
-                <p className="text-xs font-medium text-zinc-400">Categories</p>
-              </div>
-              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
-              <div>
-                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                  1-click
-                </p>
-                <p className="text-xs font-medium text-zinc-400">
-                  AI scaffold prompt
-                </p>
-              </div>
-            </div>
           </div>
 
           <div className="flex shrink-0 flex-col gap-3 lg:max-w-xs lg:pb-2">
