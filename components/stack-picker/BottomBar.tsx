@@ -26,6 +26,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
   );
 
   const prompt = hasAny ? buildPrompt(CATEGORIES, selections) : "";
+  const selectedCount = Object.keys(selections).length;
 
   async function handleDownloadPng() {
     setDownloading("png");
@@ -50,13 +51,26 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
   return (
     <>
       <footer
-        className="fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-200 bg-white/90 px-6 py-3 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90"
+        className="fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-200/80 bg-white/95 px-4 py-3 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/95 sm:px-6"
         aria-label="Your selected stack"
       >
-        <div className="mx-auto flex max-w-7xl items-center gap-4">
-          <span className="hidden shrink-0 text-[10px] font-semibold uppercase tracking-widest text-zinc-400 sm:block">
-            Your Stack
-          </span>
+        <div className="mx-auto flex max-w-7xl items-center gap-3">
+          {hasAny && (
+            <div className="hidden shrink-0 items-center gap-2 sm:flex">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
+                {selectedCount}
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-400">
+                selected
+              </span>
+            </div>
+          )}
+
+          {!hasAny && (
+            <span className="hidden shrink-0 text-[11px] font-semibold uppercase tracking-widest text-zinc-300 sm:block dark:text-zinc-700">
+              Nothing selected yet
+            </span>
+          )}
 
           <div
             className="flex flex-1 gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -73,38 +87,41 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
             <button
               disabled={!hasAny}
               onClick={() => setPromptOpen(true)}
-              className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Copy className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Copy prompt</span>
+              <span className="hidden sm:inline">Copy AI prompt</span>
               <span className="sm:hidden">Prompt</span>
             </button>
 
             <button
               disabled={!hasAny || downloading === "png"}
               onClick={handleDownloadPng}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+              title="Download stack card as PNG"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <Download className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">
-                {downloading === "png" ? "Exporting…" : "Download PNG"}
+                {downloading === "png" ? "Exporting…" : "Stack card"}
               </span>
             </button>
 
             <button
               disabled={!hasAny || downloading === "diagram"}
               onClick={handleDownloadDiagram}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+              title="Download architecture diagram as PNG"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
             >
               <FileImage className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">
-                {downloading === "diagram" ? "Exporting…" : "Download diagram"}
+                {downloading === "diagram" ? "Exporting…" : "Diagram"}
               </span>
             </button>
 
             <button
               onClick={onReset}
-              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 px-3 py-2 text-sm font-medium text-zinc-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 active:scale-[.98] dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-900 dark:hover:bg-red-950/30 dark:hover:text-red-400"
+              title="Reset all selections"
+              className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-200 px-3 py-2 text-sm font-medium text-zinc-400 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 active:scale-[.98] dark:border-zinc-700 dark:text-zinc-500 dark:hover:border-red-900/50 dark:hover:bg-red-950/30 dark:hover:text-red-400"
               aria-label="Reset all selections"
             >
               <RotateCcw className="h-3.5 w-3.5" />

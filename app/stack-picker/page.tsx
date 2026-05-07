@@ -3,14 +3,14 @@ import { SiteNav } from "@/components/stack-picker/SiteNav";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pico — Stack Picker",
+  title: "Pico — Pick your stack. Ship it.",
   description:
-    "Curate your perfect dev stack from 100+ technologies. Export architecture diagrams and AI scaffold prompts instantly.",
+    "Choose from 100+ battle-tested technologies across every layer of your stack. Export architecture diagrams and AI scaffold prompts in one click.",
   openGraph: {
-    title: "Pico — Pick a stack. Ship it.",
+    title: "Pico — Pick your stack. Ship it.",
     description:
-      "Curate your perfect dev stack from 100+ technologies. Export architecture diagrams and AI scaffold prompts instantly.",
-    url: "https://yoursite.com/stack-picker",
+      "Choose from 100+ battle-tested technologies across every layer of your stack. Export architecture diagrams and AI scaffold prompts in one click.",
+    url: "https://pico.dev/stack-picker",
     siteName: "Pico",
   },
 };
@@ -21,49 +21,90 @@ export default function StackPickerPage() {
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 font-sans dark:bg-zinc-950">
       <SiteNav />
-
       <section
-        className="mx-auto w-full max-w-7xl px-6 pb-12 pt-20 lg:px-8"
+        className="mx-auto w-full max-w-7xl px-6 pb-14 pt-16 lg:px-8 lg:pt-20"
         aria-labelledby="hero-heading"
       >
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              Free & Open Source
-            </div>
-
             <h1
               id="hero-heading"
-              className="mb-5 text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl lg:text-6xl"
+              className="mb-5 text-[2.6rem] font-bold leading-[1.1] tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl lg:text-6xl"
             >
-              Pick your stack.{" "}
-              <span className="text-blue-600">Ship faster.</span>
+              Your stack, <br className="hidden sm:block" />
+              <span className="text-blue-600">decided.</span>
             </h1>
-
-            <p className="max-w-lg text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
-              Curate your perfect tech stack from 100+ technologies. Export a
-              clean architecture diagram or a ready-to-paste AI scaffold prompt
-              in one click.
+            <p className="max-w-120 text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
+              Stop debating. Pick from 100+ battle-tested technologies across
+              every layer then export a clean architecture diagram or a
+              ready-to-paste AI scaffold prompt in one click.
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-6">
+              <div>
+                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  100+
+                </p>
+                <p className="text-xs font-medium text-zinc-400">
+                  Technologies
+                </p>
+              </div>
+              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
+              <div>
+                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  17
+                </p>
+                <p className="text-xs font-medium text-zinc-400">Categories</p>
+              </div>
+              <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-800" />
+              <div>
+                <p className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                  1-click
+                </p>
+                <p className="text-xs font-medium text-zinc-400">
+                  AI scaffold prompt
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="flex shrink-0 flex-wrap gap-2">
+          <div className="flex shrink-0 flex-col gap-3 lg:max-w-xs lg:pb-2">
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-600">
+              How it works
+            </p>
             {[
-              { label: "Click to select", color: "bg-blue-500" },
-              { label: "Click again to remove", color: "bg-zinc-400" },
-              { label: "Export when ready", color: "bg-emerald-500" },
+              {
+                step: "1",
+                label: "Select your tools",
+                desc: "Click any technology to add it to your stack.",
+              },
+              {
+                step: "2",
+                label: "Export your blueprint",
+                desc: "Download an architecture diagram or copy the AI prompt.",
+              },
+              {
+                step: "3",
+                label: "Start building",
+                desc: "Paste into any AI assistant. Get a scaffold in seconds.",
+              },
             ].map((item) => (
-              <span
-                key={item.label}
-                className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
+              <div
+                key={item.step}
+                className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900"
               >
-                <span className={`h-1.5 w-1.5 rounded-full ${item.color}`} />
-                {item.label}
-              </span>
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
+                  {item.step}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                    {item.label}
+                  </p>
+                  <p className="text-xs text-zinc-400 dark:text-zinc-500">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
