@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://usepico.vercel.app">Live Demo</a> •
+  <a href="https://usepico.vercel.app/stack-picker">Live Demo</a> •
   <a href="https://github.com/Vinodbiradar09/pico">GitHub</a>
 </p>
 
@@ -20,54 +20,54 @@
 
 Pico helps developers compose production-ready tech stacks in seconds.
 
-Browse 100+ battle-tested technologies across 17 layers from frontend frameworks to CI/CD then export your blueprint as:
+Browse 100+ battle-tested technologies across 17 layers — from frontend frameworks to CI/CD — then export your blueprint as:
 
-- an architecture diagram
-- a shareable stack card
-- a ready-to-paste AI scaffold prompt
+- an **architecture diagram**
+- a shareable **stack card**
+- a ready-to-paste **AI scaffold prompt**
 
-The goal is to reduce decision fatigue and help developers move from ideas to execution faster.
+The goal is to reduce decision fatigue and help developers move from idea to execution faster.
 
 ---
 
 ## Features
 
 ### Technology Selection
-- 100+ curated technologies across 17 categories:
-  - Frontend
-  - Styling / UI
-  - Backend Runtime
-  - Compute / Hosting
-  - Database
-  - ORM / Data Layer
-  - Authentication
-  - File / Blob Storage
-  - Monitoring / APM
-  - Product Analytics
-  - Web Analytics
-  - Transactional Email
-  - Payments
-  - AI / LLM
-  - Search
-  - CMS / Content
-  - CI / CD
+
+100+ curated technologies across 17 categories:
+
+| # | Category |
+|---|----------|
+| 1 | Frontend |
+| 2 | Styling / UI |
+| 3 | Backend Runtime |
+| 4 | Compute / Hosting |
+| 5 | Database |
+| 6 | ORM / Data Layer |
+| 7 | Authentication |
+| 8 | File / Blob Storage |
+| 9 | Monitoring / APM |
+| 10 | Product Analytics |
+| 11 | Web Analytics |
+| 12 | Transactional Email |
+| 13 | Payments |
+| 14 | AI / LLM |
+| 15 | Search |
+| 16 | CMS / Content |
+| 17 | CI / CD |
 
 ### Exports
-- One-click AI scaffold prompt compatible with ChatGPT, Claude, and similar tools
-- High-resolution PNG stack card export
-- Vertical architecture diagram export showing system flow
 
-### UX
-- Dark mode support
-- Fully responsive (mobile, tablet, desktop)
-- Keyboard navigable with ARIA labels and focus management
+- **AI scaffold prompt** — One-click copy, compatible with ChatGPT, Claude, and similar tools
+- **Stack card** — High-resolution PNG export
+- **Architecture diagram** — Vertical system flow diagram export
 
 ---
 
 ## Tech Stack
 
 | Layer | Technology |
-|------|-----------|
+|-------|------------|
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
@@ -81,6 +81,7 @@ The goal is to reduce decision fatigue and help developers move from ideas to ex
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - pnpm
 
@@ -90,46 +91,87 @@ The goal is to reduce decision fatigue and help developers move from ideas to ex
 git clone https://github.com/Vinodbiradar09/pico.git
 cd pico
 pnpm install
+```
 
-Development
+### Development
+
+```bash
 pnpm dev
-Open http://localhost:3000 in your browser.
-Production Build
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Production Build
+
+```bash
 pnpm build
-Linting
+```
+
+### Linting
+
+```bash
 pnpm lint
+```
 
-Project Structure
-pico/├── app/│   ├── stack-picker/        # Main stack picker page│   ├── layout.tsx           # Root layout with fonts│   └── page.tsx             # Redirects to /stack-picker├── components/│   └── stack-picker/        # UI components (cards, bottom bar, modals, icons)├── hooks/│   └── useStackSelections.ts├── lib/│   ├── stack-data.ts        # 100+ technologies across 17 categories│   └── stack-utils.ts       # Prompt builder and export logic├── public/│   └── og-banner.png        # Open Graph image└── package.json
+---
 
-Deployment
+## Project Structure
+
+```
+pico/
+├── app/
+│   ├── stack-picker/        # Main stack picker page
+│   ├── layout.tsx           # Root layout with fonts & OG metadata
+│   └── page.tsx             # Redirects to /stack-picker
+├── components/
+│   └── stack-picker/        # UI components (cards, bottom bar, modals, icons)
+├── hooks/
+│   └── useStackSelections.ts
+├── lib/
+│   ├── stack-data.ts        # 100+ technologies across 17 categories
+│   └── stack-utils.ts       # Prompt builder and export logic
+├── public/
+│   └── og-banner.png        # Open Graph image
+└── package.json
+```
+
+---
+
+## Deployment
+
 Pico is deployed on Vercel.
-Production URL:
-https://usepico.vercel.app
+
+**Production URL:** [https://usepico.vercel.app](https://usepico.vercel.app/stack-picker)
+
 To deploy your own instance, connect the repository to Vercel or run:
+
+```bash
 pnpm build
+```
 
-Contributing
-Contributions are welcome.
+---
 
+## Contributing
 
-Fork the repository
+Contributions are welcome!
 
+1. Fork the repository
+2. Create a feature branch
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m "Add amazing feature"
+   ```
+4. Push to the branch
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request
 
-Create a feature branch
-git checkout -b feature/amazing-feature
+---
 
+## License
 
-Commit your changes
-git commit -m "Add amazing feature"
-
-
-Push to the branch
-git push origin feature/amazing-feature
-
-Open a Pull Request
-
-License
-MIT License
-Built by Vinod Biradar.
----If you want next:- a **shorter README for Hacker News**- a **README badge set**- or a **“Why Pico exists” philosophy section**say the word.
+[MIT](./LICENSE) — Built by [Vinod Biradar](https://github.com/Vinodbiradar09).
