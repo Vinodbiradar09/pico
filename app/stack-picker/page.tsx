@@ -3,13 +3,13 @@ import { SiteNav } from "@/components/stack-picker/SiteNav";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Stack Picker — Pico",
+  title: "Pico — Stack Picker",
   description:
-    "Pick your 2026 dev stack layer by layer. Export a clean stack card or a ready-to-paste AI scaffold prompt.",
+    "Curate your perfect dev stack from 100+ technologies. Export architecture diagrams and AI scaffold prompts instantly.",
   openGraph: {
-    title: "Pick a stack. Ship it.",
+    title: "Pico — Pick a stack. Ship it.",
     description:
-      "Build your 2026 dev stack and export a clean diagram or AI prompt.",
+      "Curate your perfect dev stack from 100+ technologies. Export architecture diagrams and AI scaffold prompts instantly.",
     url: "https://yoursite.com/stack-picker",
     siteName: "Pico",
   },
@@ -23,36 +23,49 @@ export default function StackPickerPage() {
       <SiteNav />
 
       <section
-        className="mx-auto w-full max-w-7xl px-6 pb-10 pt-14 lg:px-8"
+        className="mx-auto w-full max-w-7xl px-6 pb-12 pt-20 lg:px-8"
         aria-labelledby="hero-heading"
       >
-        <p className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-zinc-400">
-          <span
-            className="block h-px w-6 bg-zinc-300 dark:bg-zinc-600"
-            aria-hidden="true"
-          />
-          Stack Picker Tool
-        </p>
-        <h1
-          id="hero-heading"
-          className="mb-3 text-5xl font-bold leading-[1.08] tracking-[-0.03em] text-zinc-900 dark:text-zinc-50 lg:text-6xl"
-        >
-          Pick a <span className="text-blue-600">stack.</span> Ship it.
-        </h1>
-        <p className="mb-5 max-w-125 text-base leading-relaxed text-zinc-500 dark:text-zinc-400">
-          Click through each layer to build your 2026 dev stack. Export a clean
-          stack card or a ready-to-paste AI prompt.
-        </p>
-        <div className="flex flex-wrap gap-2" aria-label="Instructions">
-          <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600 dark:border-blue-900 dark:bg-blue-950/50 dark:text-blue-400">
-            Single click to select
-          </span>
-          <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600 dark:border-blue-900 dark:bg-blue-950/50 dark:text-blue-400">
-            Click again to deselect
-          </span>
-          <span className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
-            Picks appear in bottom bar
-          </span>
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-semibold text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Free & Open Source
+            </div>
+
+            <h1
+              id="hero-heading"
+              className="mb-5 text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-5xl lg:text-6xl"
+            >
+              Pick your stack.{" "}
+              <span className="text-blue-600">Ship faster.</span>
+            </h1>
+
+            <p className="max-w-lg text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
+              Curate your perfect tech stack from 100+ technologies. Export a
+              clean architecture diagram or a ready-to-paste AI scaffold prompt
+              in one click.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap gap-2">
+            {[
+              { label: "Click to select", color: "bg-blue-500" },
+              { label: "Click again to remove", color: "bg-zinc-400" },
+              { label: "Export when ready", color: "bg-emerald-500" },
+            ].map((item) => (
+              <span
+                key={item.label}
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3.5 py-1.5 text-xs font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400"
+              >
+                <span className={`h-1.5 w-1.5 rounded-full ${item.color}`} />
+                {item.label}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 

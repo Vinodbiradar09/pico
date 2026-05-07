@@ -73,7 +73,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
             <button
               disabled={!hasAny}
               onClick={() => setPromptOpen(true)}
-              className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40"
             >
               <Copy className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">Copy prompt</span>
@@ -83,7 +83,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
             <button
               disabled={!hasAny || downloading === "png"}
               onClick={handleDownloadPng}
-              className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
             >
               <Download className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">
@@ -94,7 +94,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
             <button
               disabled={!hasAny || downloading === "diagram"}
               onClick={handleDownloadDiagram}
-              className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
             >
               <FileImage className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">
@@ -104,7 +104,7 @@ export function BottomBar({ selections, hasAny, onReset }: BottomBarProps) {
 
             <button
               onClick={onReset}
-              className="flex items-center gap-2 rounded-lg border border-zinc-200 px-3 py-2 text-sm font-medium text-zinc-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 active:scale-[.98] dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-900 dark:hover:bg-red-950/30 dark:hover:text-red-400"
+              className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-200 px-3 py-2 text-sm font-medium text-zinc-500 transition hover:border-red-200 hover:bg-red-50 hover:text-red-500 active:scale-[.98] dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-900 dark:hover:bg-red-950/30 dark:hover:text-red-400"
               aria-label="Reset all selections"
             >
               <RotateCcw className="h-3.5 w-3.5" />

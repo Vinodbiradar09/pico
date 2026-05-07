@@ -17,18 +17,18 @@ export function StackItemRow({ item, selected, onToggle }: StackItemRowProps) {
       aria-pressed={selected}
       className={`
         group flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left
-        transition-all duration-100 focus-visible:outline-none focus-visible:ring-2
-        focus-visible:ring-blue-500 focus-visible:ring-offset-2
+        transition-all duration-150 focus-visible:outline-none focus-visible:ring-2
+        focus-visible:ring-blue-500 focus-visible:ring-offset-2 cursor-pointer
         ${
           selected
-            ? "border-blue-300 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/40"
-            : "border-transparent hover:border-zinc-200 hover:bg-zinc-50 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/50"
+            ? "border-blue-300 bg-blue-50/80 shadow-sm dark:border-blue-800 dark:bg-blue-950/30"
+            : "border-transparent hover:border-zinc-200 hover:bg-zinc-50/80 dark:hover:border-zinc-700 dark:hover:bg-zinc-800/50"
         }
       `}
     >
       <div
         className={`
-          flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border
+          flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors
           ${
             selected
               ? "border-blue-200 bg-white dark:border-blue-900 dark:bg-zinc-900"
@@ -40,7 +40,7 @@ export function StackItemRow({ item, selected, onToggle }: StackItemRowProps) {
       </div>
 
       <span
-        className={`flex-1 text-sm font-medium leading-none ${
+        className={`flex-1 text-sm font-medium leading-none transition-colors ${
           selected
             ? "text-blue-700 dark:text-blue-400"
             : "text-zinc-800 dark:text-zinc-200"

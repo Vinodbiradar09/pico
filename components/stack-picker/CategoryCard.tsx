@@ -13,7 +13,7 @@ export function CategoryCard({
   onToggle,
 }: CategoryCardProps) {
   return (
-    <article className="rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+    <article className="rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
       <header className="px-5 pb-3 pt-5">
         <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
           {category.subtitle}
