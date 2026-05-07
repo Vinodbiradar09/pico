@@ -13,6 +13,9 @@ export interface Category {
 
 const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 const SIMPLE = "https://cdn.simpleicons.org";
+const SVGL = "https://svgl.app/library";
+const DASHICONS = "https://cdn.jsdelivr.net/npm/@dashboardicons/icons/icons";
+const PROICONS = "https://proicons.com/icon";
 
 export const CATEGORIES: Category[] = [
   {
@@ -20,39 +23,15 @@ export const CATEGORIES: Category[] = [
     title: "Frontend",
     subtitle: "UI Framework",
     items: [
-      {
-        id: "nextjs",
-        name: "Next.js",
-        iconUrl: `${SIMPLE}/nextdotjs`,
-      },
-      {
-        id: "react",
-        name: "React",
-        iconUrl: `${SIMPLE}/react`,
-      },
-      {
-        id: "vue",
-        name: "Vue",
-        iconUrl: `${SIMPLE}/vue`,
-      },
-      {
-        id: "svelte",
-        name: "SvelteKit",
-        iconUrl: `${SIMPLE}/svelte`,
-      },
+      { id: "nextjs", name: "Next.js", iconUrl: `${SIMPLE}/nextdotjs` },
+      { id: "react", name: "React", iconUrl: `${SIMPLE}/react` },
+      { id: "vue", name: "Vue", iconUrl: `${SIMPLE}/vuedotjs` },
+      { id: "svelte", name: "SvelteKit", iconUrl: `${SIMPLE}/svelte` },
       { id: "astro", name: "Astro", iconUrl: `${SIMPLE}/astro` },
       { id: "solidjs", name: "SolidJS", iconUrl: `${SIMPLE}/solid` },
-      {
-        id: "angular",
-        name: "Angular",
-        iconUrl: `${SIMPLE}/angular`,
-      },
+      { id: "angular", name: "Angular", iconUrl: `${SIMPLE}/angular` },
       { id: "remix", name: "Remix", iconUrl: `${SIMPLE}/remix` },
-      {
-        id: "nuxt",
-        name: "Nuxt",
-        iconUrl: `${SIMPLE}/nuxt`,
-      },
+      { id: "nuxt", name: "Nuxt", iconUrl: `${SIMPLE}/nuxt` },
       { id: "blazor", name: "Blazor", iconUrl: `${SIMPLE}/blazor` },
     ],
   },
@@ -66,24 +45,12 @@ export const CATEGORIES: Category[] = [
         name: "Tailwind CSS",
         iconUrl: `${SIMPLE}/tailwindcss`,
       },
-      {
-        id: "shadcn",
-        name: "shadcn/ui",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
-      {
-        id: "radix",
-        name: "Radix UI",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "shadcn", name: "shadcn/ui", iconUrl: `${SIMPLE}/shadcnui` },
+      { id: "radix", name: "Radix UI", iconUrl: `${SIMPLE}/radixui` },
       { id: "chakra", name: "Chakra UI", iconUrl: `${SIMPLE}/chakraui` },
       { id: "mantine", name: "Mantine", iconUrl: `${SIMPLE}/mantine` },
       { id: "mui", name: "MUI", iconUrl: `${SIMPLE}/mui` },
-      {
-        id: "bootstrap",
-        name: "Bootstrap",
-        iconUrl: `${SIMPLE}/bootstrap`,
-      },
+      { id: "bootstrap", name: "Bootstrap", iconUrl: `${SIMPLE}/bootstrap` },
     ],
   },
   {
@@ -91,27 +58,15 @@ export const CATEGORIES: Category[] = [
     title: "Backend Runtime",
     subtitle: "What Runs Your Code",
     items: [
-      {
-        id: "nodejs",
-        name: "Node.js",
-        iconUrl: `${SIMPLE}/nodedotjs`,
-      },
+      { id: "nodejs", name: "Node.js", iconUrl: `${SIMPLE}/nodedotjs` },
       { id: "bun", name: "Bun", iconUrl: `${SIMPLE}/bun` },
       { id: "deno", name: "Deno", iconUrl: `${SIMPLE}/deno` },
       { id: "fastapi", name: "Python (FastAPI)", iconUrl: `${SIMPLE}/fastapi` },
       { id: "go", name: "Go", iconUrl: `${SIMPLE}/go` },
       { id: "rails", name: "Ruby on Rails", iconUrl: `${SIMPLE}/rubyonrails` },
-      {
-        id: "elixir",
-        name: "Elixir / Phoenix",
-        iconUrl: `${SIMPLE}/elixir`,
-      },
+      { id: "elixir", name: "Elixir / Phoenix", iconUrl: `${SIMPLE}/elixir` },
       { id: "nestjs", name: "NestJS", iconUrl: `${SIMPLE}/nestjs` },
-      {
-        id: "hono",
-        name: "Hono",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "hono", name: "Hono", iconUrl: `${SIMPLE}/hono` },
       {
         id: "dotnet",
         name: "ASP.NET Core (.NET)",
@@ -144,12 +99,12 @@ export const CATEGORIES: Category[] = [
       {
         id: "azure",
         name: "Azure App Service",
-        iconUrl: `${SIMPLE}/azure`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
       {
         id: "azurefunc",
         name: "Azure Functions",
-        iconUrl: `${SIMPLE}/azure`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
       {
         id: "cfworkers",
@@ -172,11 +127,7 @@ export const CATEGORIES: Category[] = [
     title: "Database",
     subtitle: "Where Data Sleeps",
     items: [
-      {
-        id: "postgres",
-        name: "PostgreSQL",
-        iconUrl: `${SIMPLE}/postgresql`,
-      },
+      { id: "postgres", name: "PostgreSQL", iconUrl: `${SIMPLE}/postgresql` },
       { id: "neon", name: "Neon", iconUrl: `${SIMPLE}/neon` },
       { id: "supabase", name: "Supabase", iconUrl: `${SIMPLE}/supabase` },
       {
@@ -184,37 +135,21 @@ export const CATEGORIES: Category[] = [
         name: "PlanetScale",
         iconUrl: `${SIMPLE}/planetscale`,
       },
-      {
-        id: "mysql",
-        name: "MySQL",
-        iconUrl: `${SIMPLE}/mysql`,
-      },
-      {
-        id: "mongodb",
-        name: "MongoDB",
-        iconUrl: `${SIMPLE}/mongodb`,
-      },
+      { id: "mysql", name: "MySQL", iconUrl: `${SIMPLE}/mysql` },
+      { id: "mongodb", name: "MongoDB", iconUrl: `${SIMPLE}/mongodb` },
       { id: "firebase", name: "Firebase", iconUrl: `${SIMPLE}/firebase` },
       {
         id: "dynamodb",
         name: "DynamoDB",
         iconUrl: `${DEVICON}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
       },
-      {
-        id: "convex",
-        name: "Convex",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "convex", name: "Convex", iconUrl: `${SIMPLE}/convex` },
       {
         id: "turso",
         name: "Turso",
         iconUrl: `${DEVICON}/sqlite/sqlite-original.svg`,
       },
-      {
-        id: "redis",
-        name: "Redis",
-        iconUrl: `${SIMPLE}/redis`,
-      },
+      { id: "redis", name: "Redis", iconUrl: `${SIMPLE}/redis` },
       {
         id: "sqlserver",
         name: "SQL Server",
@@ -223,12 +158,12 @@ export const CATEGORIES: Category[] = [
       {
         id: "azuresql",
         name: "Azure SQL",
-        iconUrl: `${SIMPLE}/azure`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
       {
         id: "cosmosdb",
         name: "Cosmos DB",
-        iconUrl: `${SIMPLE}/azure`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
     ],
   },
@@ -239,22 +174,14 @@ export const CATEGORIES: Category[] = [
     items: [
       { id: "prisma", name: "Prisma", iconUrl: `${SIMPLE}/prisma` },
       { id: "drizzle", name: "Drizzle", iconUrl: `${SIMPLE}/drizzle` },
-      {
-        id: "kysely",
-        name: "Kysely",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "kysely", name: "Kysely", iconUrl: `${SIMPLE}/postgresql` },
       {
         id: "typeorm",
         name: "TypeORM",
         iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
       },
       { id: "sequelize", name: "Sequelize", iconUrl: `${SIMPLE}/sequelize` },
-      {
-        id: "rawsql",
-        name: "Raw SQL",
-        iconUrl: `${SIMPLE}/postgresql`,
-      },
+      { id: "rawsql", name: "Raw SQL", iconUrl: `${SIMPLE}/postgresql` },
       {
         id: "efcore",
         name: "Entity Framework Core",
@@ -277,13 +204,9 @@ export const CATEGORIES: Category[] = [
       {
         id: "nextauth",
         name: "NextAuth / Auth.js",
-        iconUrl: `${DEVICON}/nextjs/nextjs-original.svg`,
+        iconUrl: `${SIMPLE}/authjs`,
       },
-      {
-        id: "workos",
-        name: "WorkOS",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "workos", name: "WorkOS", iconUrl: `${SVGL}/workos.svg` },
       {
         id: "firebaseauth",
         name: "Firebase Auth",
@@ -292,7 +215,7 @@ export const CATEGORIES: Category[] = [
       {
         id: "betterauth",
         name: "Better Auth",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
+        iconUrl: `${SVGL}/better-auth.svg`,
       },
       {
         id: "cognito",
@@ -302,7 +225,7 @@ export const CATEGORIES: Category[] = [
       {
         id: "entraid",
         name: "Microsoft Entra ID",
-        iconUrl: `${SIMPLE}/microsoft`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
     ],
   },
@@ -326,12 +249,12 @@ export const CATEGORIES: Category[] = [
       {
         id: "azureblob",
         name: "Azure Blob",
-        iconUrl: `${SIMPLE}/azure`,
+        iconUrl: `${DEVICON}/azure/azure-original.svg`,
       },
       {
         id: "uploadthing",
         name: "UploadThing",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
+        iconUrl: `${SVGL}/uploadthing.svg`,
       },
     ],
   },
@@ -355,20 +278,12 @@ export const CATEGORIES: Category[] = [
       },
       { id: "grafana", name: "Grafana", iconUrl: `${SIMPLE}/grafana` },
       { id: "prometheus", name: "Prometheus", iconUrl: `${SIMPLE}/prometheus` },
-      {
-        id: "honeycomb",
-        name: "Honeycomb",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
-      {
-        id: "axiom",
-        name: "Axiom",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "honeycomb", name: "Honeycomb", iconUrl: `${SVGL}/honeycomb.svg` },
+      { id: "axiom", name: "Axiom", iconUrl: `${SVGL}/axiom.svg` },
       {
         id: "betterstack",
         name: "Better Stack",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
+        iconUrl: `${SIMPLE}/betterstack`,
       },
     ],
   },
@@ -378,23 +293,15 @@ export const CATEGORIES: Category[] = [
     subtitle: "What Users Actually Do",
     items: [
       { id: "posthog", name: "PostHog", iconUrl: `${SIMPLE}/posthog` },
-      { id: "amplitude", name: "Amplitude", iconUrl: `${SIMPLE}/amplitude` },
+      {
+        id: "amplitude",
+        name: "Amplitude",
+        iconUrl: `${DASHICONS}/amplitude.svg`,
+      },
       { id: "mixpanel", name: "Mixpanel", iconUrl: `${SIMPLE}/mixpanel` },
-      {
-        id: "heap",
-        name: "Heap",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
-      },
-      {
-        id: "june",
-        name: "June",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
-      },
-      {
-        id: "statsig",
-        name: "Statsig",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
-      },
+      { id: "heap", name: "Heap", iconUrl: `${DASHICONS}/heap.svg` },
+      { id: "june", name: "June", iconUrl: `${DASHICONS}/june.svg` },
+      { id: "statsig", name: "Statsig", iconUrl: `${DASHICONS}/statsig.svg` },
     ],
   },
   {
@@ -407,25 +314,17 @@ export const CATEGORIES: Category[] = [
         name: "Vercel Analytics",
         iconUrl: `${SIMPLE}/vercel`,
       },
-      {
-        id: "ga",
-        name: "Google Analytics",
-        iconUrl: `${SIMPLE}/google`,
-      },
+      { id: "ga", name: "Google Analytics", iconUrl: `${SIMPLE}/google` },
       {
         id: "plausible",
         name: "Plausible",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
+        iconUrl: `${DASHICONS}/plausible.svg`,
       },
-      {
-        id: "fathom",
-        name: "Fathom",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
-      },
+      { id: "fathom", name: "Fathom", iconUrl: `${SIMPLE}/fathom` },
       {
         id: "simpleanalytics",
         name: "Simple Analytics",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
+        iconUrl: `${SIMPLE}/simpleanalytics`,
       },
     ],
   },
@@ -438,12 +337,12 @@ export const CATEGORIES: Category[] = [
       {
         id: "postmark",
         name: "Postmark",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
+        iconUrl: `${DASHICONS}/postmark.svg`,
       },
       {
         id: "sendgrid",
         name: "SendGrid",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
+        iconUrl: `${DASHICONS}/sendgrid.svg`,
       },
       {
         id: "awsses",
@@ -451,11 +350,7 @@ export const CATEGORIES: Category[] = [
         iconUrl: `${DEVICON}/amazonwebservices/amazonwebservices-original-wordmark.svg`,
       },
       { id: "mailgun", name: "Mailgun", iconUrl: `${SIMPLE}/mailgun` },
-      {
-        id: "loops",
-        name: "Loops",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
-      },
+      { id: "loops", name: "Loops", iconUrl: `${SIMPLE}/loops` },
     ],
   },
   {
@@ -470,11 +365,7 @@ export const CATEGORIES: Category[] = [
         iconUrl: `${SIMPLE}/lemonsqueezy`,
       },
       { id: "paddle", name: "Paddle", iconUrl: `${SIMPLE}/paddle` },
-      {
-        id: "polar",
-        name: "Polar",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "polar", name: "Polar", iconUrl: `${SVGL}/polar.svg` },
       { id: "paypal", name: "PayPal", iconUrl: `${SIMPLE}/paypal` },
     ],
   },
@@ -488,28 +379,20 @@ export const CATEGORIES: Category[] = [
         name: "Anthropic Claude",
         iconUrl: `${SIMPLE}/anthropic`,
       },
-      { id: "openai", name: "OpenAI", iconUrl: `${SIMPLE}/openai` },
+      { id: "openai", name: "OpenAI", iconUrl: `${PROICONS}/264667.svg` },
       {
         id: "vercelai",
         name: "Vercel AI Gateway",
         iconUrl: `${SIMPLE}/vercel`,
       },
-      {
-        id: "gemini",
-        name: "Google Gemini",
-        iconUrl: `${SIMPLE}/google`,
-      },
+      { id: "gemini", name: "Google Gemini", iconUrl: `${SIMPLE}/google` },
       { id: "replicate", name: "Replicate", iconUrl: `${SIMPLE}/replicate` },
       {
         id: "togetherai",
         name: "Together AI",
-        iconUrl: `${DEVICON}/javascript/javascript-original.svg`,
+        iconUrl: `${PROICONS}/264670.svg`,
       },
-      {
-        id: "groq",
-        name: "Groq",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "groq", name: "Groq", iconUrl: `${PROICONS}/264668.svg` },
     ],
   },
   {
@@ -523,17 +406,9 @@ export const CATEGORIES: Category[] = [
         name: "Meilisearch",
         iconUrl: `${SIMPLE}/meilisearch`,
       },
-      {
-        id: "typesense",
-        name: "Typesense",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "typesense", name: "Typesense", iconUrl: `${PROICONS}/264669.svg` },
       { id: "elastic", name: "Elastic", iconUrl: `${SIMPLE}/elastic` },
-      {
-        id: "pgfts",
-        name: "Postgres FTS",
-        iconUrl: `${SIMPLE}/postgresql`,
-      },
+      { id: "pgfts", name: "Postgres FTS", iconUrl: `${SIMPLE}/postgresql` },
     ],
   },
   {
@@ -543,11 +418,7 @@ export const CATEGORIES: Category[] = [
     items: [
       { id: "sanity", name: "Sanity", iconUrl: `${SIMPLE}/sanity` },
       { id: "contentful", name: "Contentful", iconUrl: `${SIMPLE}/contentful` },
-      {
-        id: "payload",
-        name: "Payload",
-        iconUrl: `${DEVICON}/typescript/typescript-original.svg`,
-      },
+      { id: "payload", name: "Payload", iconUrl: `${SIMPLE}/payloadcms` },
       { id: "strapi", name: "Strapi", iconUrl: `${SIMPLE}/strapi` },
       { id: "notion", name: "Notion", iconUrl: `${SIMPLE}/notion` },
       {
@@ -573,11 +444,7 @@ export const CATEGORIES: Category[] = [
         iconUrl: `${SIMPLE}/vercel`,
       },
       { id: "circleci", name: "CircleCI", iconUrl: `${SIMPLE}/circleci` },
-      {
-        id: "gitlabci",
-        name: "GitLab CI",
-        iconUrl: `${SIMPLE}/gitlab`,
-      },
+      { id: "gitlabci", name: "GitLab CI", iconUrl: `${SIMPLE}/gitlab` },
       { id: "buildkite", name: "Buildkite", iconUrl: `${SIMPLE}/buildkite` },
     ],
   },
