@@ -75,8 +75,7 @@ async function fetchIconAsDataUri(url: string): Promise<string> {
 
 /**
  * Pre-fetch all unique icon URLs and return a Map<iconUrl, dataUri>.
- * This is the key fix — canvas refuses to draw cross-origin images,
- * but base64 data URIs are same-origin and always work.
+ * Base64 data URIs are same-origin and always work in canvas.
  */
 async function prefetchIcons(
   selected: { item: StackItem }[],
@@ -92,7 +91,6 @@ async function prefetchIcons(
   return new Map(pairs);
 }
 
-/** Stack card — 3-col grid matching my-stack.png */
 function buildCardSvgInternal(
   selected: { cat: Category; item: StackItem }[],
   iconMap: Map<string, string>,
@@ -135,47 +133,161 @@ function buildCardSvgInternal(
 </svg>`;
 }
 
-/** Architecture diagram — vertical flow matching my-stack-diagram.png */
+const DIAGRAM_LAYER_DEFS: Array<{
+  label: string;
+  catIds: string[];
+  special?: "user";
+}> = [
+  { label: "ENTRY", catIds: [], special: "user" },
+  { label: "HOSTING / COMPUTE", catIds: ["hosting"] },
+  { label: "FRONTEND", catIds: ["frontend", "styling"] },
+  { label: "BACKEND RUNTIME", catIds: ["runtime"] },
+  { label: "IDENTITY & STORAGE", catIds: ["auth", "storage"] },
+  {
+    label: "EXTERNAL SERVICES",
+    catIds: ["email", "payments", "ai", "search", "cms"],
+  },
+  { label: "DATA LAYER", catIds: ["orm"] },
+  { label: "PERSISTENCE", catIds: ["database"] },
+  {
+    label: "OBSERVABILITY & DELIVERY",
+    catIds: ["monitoring", "productanalytics", "webanalytics", "cicd"],
+  },
+];
+
+/** Roughly truncate text so it fits inside an SVG box without overflowing. */
+function truncateSvgText(
+  text: string,
+  maxWidth: number,
+  fontSize: number,
+): string {
+  // system-ui runs narrower than classic web fonts
+  const avgCharWidth = fontSize * (text === text.toUpperCase() ? 0.52 : 0.58);
+  const maxChars = Math.floor(maxWidth / avgCharWidth);
+  if (text.length <= maxChars) return text;
+  if (maxChars <= 3) return text.slice(0, maxChars);
+  return text.slice(0, maxChars - 3) + "...";
+}
+
 function buildDiagramSvgInternal(
   selected: { cat: Category; item: StackItem }[],
   iconMap: Map<string, string>,
 ): string {
-  const BOX_W = 280;
   const BOX_H = 68;
-  const GAP = 28;
-  const PAD_X = 56;
-  const PAD_TOP = 72;
-  const PAD_BOT = 40;
+  const BOX_GAP = 12; // horizontal gap between sibling boxes in one row
+  const ROW_SPACING = 58; // vertical gap between rows (includes arrow)
+  const SECTION_LABEL_H = 20; // small-caps label height above each row
+  const PAD_X = 50;
+  const PAD_TOP = 80; // space reserved for the title header
+  const PAD_BOT = 48;
 
-  const totalW = BOX_W + PAD_X * 2;
+  const selectedMap = new Map(selected.map((s) => [s.cat.id, s]));
+
+  type ResolvedLayer = {
+    label: string;
+    items: { cat: Category; item: StackItem }[];
+    special?: "user";
+  };
+
+  const layers: ResolvedLayer[] = [];
+
+  for (const def of DIAGRAM_LAYER_DEFS) {
+    if (def.special === "user") {
+      layers.push({ label: def.label, items: [], special: "user" });
+    } else {
+      const items = def.catIds
+        .map((id) => selectedMap.get(id))
+        .filter((x): x is { cat: Category; item: StackItem } => !!x);
+      if (items.length > 0) {
+        layers.push({ label: def.label, items });
+      }
+    }
+  }
+
+  const maxItemsInLayer = Math.max(
+    ...layers.filter((l) => l.special !== "user").map((l) => l.items.length),
+    1,
+  );
+  const MIN_BOX_W = 200;
+  const SVG_W = Math.max(
+    800,
+    PAD_X * 2 + maxItemsInLayer * MIN_BOX_W + (maxItemsInLayer - 1) * BOX_GAP,
+  );
+  const CONTENT_W = SVG_W - PAD_X * 2;
+  const cx = SVG_W / 2;
+  const layerCount = layers.length;
   const totalH =
-    PAD_TOP + selected.length * BOX_H + (selected.length - 1) * GAP + PAD_BOT;
-  const cx = PAD_X + BOX_W / 2;
+    PAD_TOP +
+    layerCount * (SECTION_LABEL_H + BOX_H) +
+    (layerCount - 1) * ROW_SPACING +
+    PAD_BOT;
 
-  const nodes = selected
-    .map(({ cat, item }, i) => {
-      const y = PAD_TOP + i * (BOX_H + GAP);
-      const src = iconMap.get(item.iconUrl) ?? fallbackIcon();
-      const connector =
-        i > 0
-          ? `<line x1="${cx}" y1="${y - GAP}" x2="${cx}" y2="${y}" stroke="#d4d4d0" stroke-width="1.5" stroke-dasharray="4,3"/>`
-          : "";
+  let body = "";
+  let y = PAD_TOP;
 
-      return `
-  ${connector}
-  <rect x="${PAD_X}" y="${y}" width="${BOX_W}" height="${BOX_H}" rx="10" fill="white" stroke="#e5e5e2" stroke-width="1"/>
-  <image href="${src}" x="${PAD_X + 14}" y="${y + (BOX_H - 28) / 2}" width="28" height="28"/>
-  <text x="${PAD_X + 54}" y="${y + BOX_H / 2 - 6}" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#a1a19d" letter-spacing="1">${escapeXml(cat.subtitle.toUpperCase())}</text>
-  <text x="${PAD_X + 54}" y="${y + BOX_H / 2 + 12}" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#0a0a09">${escapeXml(item.name)}</text>`;
-    })
-    .join("\n");
+  for (let i = 0; i < layers.length; i++) {
+    const layer = layers[i];
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}">
-  <rect width="${totalW}" height="${totalH}" fill="#f8f8f6"/>
-  <text x="${PAD_X}" y="26" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#a1a19d" letter-spacing="2">SYSTEM DESIGN · ARCHITECTURE</text>
-  <text x="${PAD_X}" y="54" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#0a0a09" letter-spacing="-0.5">My 2026 Stack.</text>
-  ${nodes}
-  <text x="${PAD_X}" y="${totalH - 10}" font-family="system-ui,sans-serif" font-size="10" fill="#c0c0bc">${selected.length} LAYERS · PICO</text>
+    body += `  <text x="${PAD_X}" y="${y + 14}" font-family="system-ui,sans-serif" font-size="9" font-weight="600" fill="#a1a19d" letter-spacing="1.5">${escapeXml(layer.label)}</text>\n`;
+    y += SECTION_LABEL_H;
+
+    if (layer.special === "user") {
+      const bw = 240;
+      const bx = cx - bw / 2;
+      body += `  <rect x="${bx}" y="${y}" width="${bw}" height="${BOX_H}" rx="12" fill="#2563eb"/>\n`;
+      body += `  <text x="${bx + 20}" y="${y + 24}" font-family="system-ui,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="1.5">ENTRY POINT</text>\n`;
+      body += `  <text x="${bx + 20}" y="${y + 48}" font-family="system-ui,sans-serif" font-size="17" font-weight="700" fill="white">User · Browser</text>\n`;
+    } else {
+      const count = layer.items.length;
+      let boxW: number;
+      let startX: number;
+
+      if (count === 1) {
+        boxW = Math.min(360, Math.max(300, Math.floor(CONTENT_W * 0.5)));
+        startX = cx - boxW / 2;
+      } else {
+        boxW = Math.floor((CONTENT_W - (count - 1) * BOX_GAP) / count);
+        startX = PAD_X;
+      }
+
+      const textMaxWidth = boxW - 70;
+
+      for (let j = 0; j < count; j++) {
+        const { cat, item } = layer.items[j];
+        const bx = startX + j * (boxW + BOX_GAP);
+        const src = iconMap.get(item.iconUrl) ?? fallbackIcon();
+
+        const titleText = truncateSvgText(
+          cat.title.toUpperCase(),
+          textMaxWidth,
+          8,
+        );
+        const nameText = truncateSvgText(item.name, textMaxWidth, 14);
+
+        body += `  <rect x="${bx}" y="${y}" width="${boxW}" height="${BOX_H}" rx="10" fill="white" stroke="#e5e5e2" stroke-width="1"/>\n`;
+        body += `  <image href="${src}" x="${bx + 14}" y="${y + (BOX_H - 28) / 2}" width="28" height="28"/>\n`;
+        body += `  <text x="${bx + 54}" y="${y + BOX_H / 2 - 5}" font-family="system-ui,sans-serif" font-size="8" font-weight="600" fill="#2563eb" letter-spacing="1.2">${escapeXml(titleText)}</text>\n`;
+        body += `  <text x="${bx + 54}" y="${y + BOX_H / 2 + 13}" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#0a0a09">${escapeXml(nameText)}</text>\n`;
+      }
+    }
+
+    y += BOX_H;
+
+    if (i < layers.length - 1) {
+      const lineTop = y + 8;
+      const lineBot = y + ROW_SPACING - 8;
+      const headH = 8;
+      body += `  <line x1="${cx}" y1="${lineTop}" x2="${cx}" y2="${lineBot - headH}" stroke="#d4d4d0" stroke-width="1.5"/>\n`;
+      body += `  <polygon points="${cx},${lineBot} ${cx - 5},${lineBot - headH} ${cx + 5},${lineBot - headH}" fill="#d4d4d0"/>\n`;
+      y += ROW_SPACING;
+    }
+  }
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${SVG_W}" height="${totalH}" viewBox="0 0 ${SVG_W} ${totalH}">
+  <rect width="${SVG_W}" height="${totalH}" fill="#f8f8f6"/>
+  <text x="${PAD_X}" y="24" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#a1a19d" letter-spacing="2">SYSTEM DESIGN · ARCHITECTURE</text>
+  <text x="${PAD_X}" y="56" font-family="system-ui,sans-serif" font-size="26" font-weight="700" fill="#0a0a09" letter-spacing="-0.5">My 2026 Stack.</text>
+${body}  <text x="${PAD_X}" y="${totalH - 14}" font-family="system-ui,sans-serif" font-size="10" fill="#c0c0bc">${layers.length} LAYERS · PICO</text>
 </svg>`;
 }
 
@@ -194,7 +306,6 @@ async function svgStringToBlob(svgString: string, scale = 2): Promise<Blob> {
   const ctx = canvas.getContext("2d")!;
   ctx.scale(scale, scale);
 
-  // Use a Blob URL — base64 data URIs inside the SVG are already same-origin
   const svgBlob = new Blob([svgString], {
     type: "image/svg+xml;charset=utf-8",
   });
@@ -231,7 +342,6 @@ function triggerDownload(blob: Blob, filename: string) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-/** Build the stack card SVG string (handles icon prefetching internally) */
 export async function buildCardSvg(
   categories: Category[],
   selections: Selections,
@@ -244,7 +354,6 @@ export async function buildCardSvg(
   return buildCardSvgInternal(selected, iconMap);
 }
 
-/** Build the architecture diagram SVG string (handles icon prefetching internally) */
 export async function buildDiagramSvg(
   categories: Category[],
   selections: Selections,
@@ -257,7 +366,6 @@ export async function buildDiagramSvg(
   return buildDiagramSvgInternal(selected, iconMap);
 }
 
-/** Convert an SVG string to a 2× PNG and trigger browser download */
 export async function downloadPng(
   svgString: string,
   filename: string,
@@ -266,7 +374,6 @@ export async function downloadPng(
   triggerDownload(blob, filename);
 }
 
-/** Download the stack card as a 2× PNG */
 export async function downloadStackPng(
   categories: Category[],
   selections: Selections,
@@ -275,7 +382,6 @@ export async function downloadStackPng(
   await downloadPng(svg, "my-stack.png");
 }
 
-/** Download the architecture diagram as a 2× PNG */
 export async function downloadDiagramPng(
   categories: Category[],
   selections: Selections,
